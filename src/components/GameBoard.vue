@@ -1,8 +1,14 @@
 <template>
-  <div class="room-one"></div>
+  <div class="room-one">
+    <RulesDiv class="rules" />
+    <MyButton class="start">Начать игру</MyButton>
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import RulesDiv from './RulesDiv.vue';
+import MyButton from './MyButton.vue';
+</script>
 
 <style scoped>
 .room-one {
@@ -14,5 +20,15 @@
   position: relative;
   width: 1400px;
   height: 1400px;
+}
+.rules {
+  display: flex;
+  flex-direction: column;
+  margin: 300px auto 50px;
+}
+.start {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 }
 </style>
