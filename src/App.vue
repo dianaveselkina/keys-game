@@ -1,30 +1,59 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="app">
+    <GameBoard />
+  </div>
 </template>
+<script>
+import GameBoard from './components/GameBoard.vue';
+export default {
+  components: {
+    GameBoard,
+  },
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  data() {
+    return {};
+  },
+  methods: {},
+};
+</script>
+<style scoped>
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
-
-nav {
-  padding: 30px;
+body {
+  margin: 0;
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+main {
+  display: block;
 }
-
-nav a.router-link-exact-active {
-  color: #42b983;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ol,
+ul {
+  list-style: none;
+}
+img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+button {
+  cursor: pointer;
+  color: inherit;
+  font-family: inherit;
+  border: 0;
+}
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #ffffff;
 }
 </style>
