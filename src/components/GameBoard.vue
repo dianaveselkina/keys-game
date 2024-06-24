@@ -1,5 +1,10 @@
 <template>
   <div class="room-one">
+    <KeyDiv imageUrl="/img/key1.png" />
+    <KeyDiv imageUrl="/img/key2.png" />
+    <KeyDiv imageUrl="/img/key3.png" />
+    <KeyDiv imageUrl="/img/key4.png" />
+    <KeyDiv imageUrl="/img/key5.png" />
     <transition name="fade">
       <RulesDiv v-if="!show" class="rules" />
     </transition>
@@ -15,6 +20,7 @@
 import { ref } from 'vue';
 import RulesDiv from './RulesDiv.vue';
 import MyButton from './MyButton.vue';
+import KeyDiv from './KeyDiv.vue';
 const show = ref(false);
 </script>
 
