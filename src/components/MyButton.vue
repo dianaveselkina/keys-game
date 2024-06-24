@@ -15,8 +15,8 @@ export default {
   padding: 1rem;
   border-radius: 1rem;
   cursor: pointer;
-  background-color: rgba(181, 182, 33, 0.7);
-  border: 4px solid #413e15;
+  background-color: rgba(104, 72, 35, 0.5);
+  border: 4px solid rgb(104, 72, 35);
   font-size: 3rem;
   color: #664017;
 }

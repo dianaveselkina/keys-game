@@ -14,9 +14,9 @@
 .rules {
   width: 450px;
   height: 550px;
-  background: linear-gradient(rgba(186, 124, 55, 0.5), rgba(181, 182, 33, 0.5));
+  background: linear-gradient(rgba(43, 30, 16, 0.5), rgba(73, 60, 45, 0.5));
   border-radius: 10%;
-  border: 4px solid #413e15;
+  border: 4px solid rgb(43, 30, 16);
   text-align: center;
 }
 .title {

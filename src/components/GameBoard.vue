@@ -1,13 +1,21 @@
 <template>
   <div class="room-one">
-    <RulesDiv class="rules" />
-    <MyButton class="start">Начать игру</MyButton>
+    <transition name="fade">
+      <RulesDiv v-if="!show" class="rules" />
+    </transition>
+    <transition name="disappear">
+      <MyButton v-if="!show" @click="show = !show" class="start"
+        >Начать игру</MyButton
+      >
+    </transition>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import RulesDiv from './RulesDiv.vue';
 import MyButton from './MyButton.vue';
+const show = ref(false);
 </script>
 
 <style scoped>
@@ -30,5 +38,25 @@ import MyButton from './MyButton.vue';
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+}
+.fade-enter-active,
+.fade-leave-active {
+  opacity: 1;
+  transition: all 2s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  transform: translateY(-350px);
+  opacity: 0;
+}
+.disappear-enter-active,
+.disappear-leave-active {
+  opacity: 1;
+  transition: all 2s;
+}
+.disappear-enter-from,
+.disappear-leave-to {
+  transform: translateY(350px);
+  opacity: 0;
 }
 </style>
