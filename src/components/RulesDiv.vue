@@ -2,10 +2,10 @@
   <div class="rules">
     <p class="title">Правила игры</p>
     <p class="description">
-      собери все ключи,<br />
-      кликая по ним мышкой<br />
       чтобы перейти <br />
       на следующий уровень<br />
+      собери все ключи,<br />
+      кликая по ним мышкой<br />
     </p>
   </div>
 </template>
@@ -14,9 +14,9 @@
 .rules {
   width: 450px;
   height: 550px;
-  background: linear-gradient(rgba(43, 30, 16, 0.5), rgba(73, 60, 45, 0.5));
+  background: linear-gradient(rgba(186, 124, 55, 0.5), rgba(181, 182, 33, 0.5));
   border-radius: 10%;
-  border: 4px solid rgb(43, 30, 16);
+  border: 4px solid #413e15;
   text-align: center;
 }
 .title {
@@ -33,5 +33,6 @@
   text-transform: uppercase;
   font-weight: 700;
   line-height: 3rem;
+  padding: 20px;
 }
 </style>

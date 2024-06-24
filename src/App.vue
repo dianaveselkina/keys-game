@@ -53,7 +53,7 @@ button {
 }
 .app {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 90px auto;
   background-color: #ffffff;
 }
 </style>
