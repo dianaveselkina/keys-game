@@ -11,6 +11,7 @@ defineProps({
 <style scoped>
 .key {
   display: inline-block;
+  z-index: 5;
 }
 .key__img {
   width: 25px;
