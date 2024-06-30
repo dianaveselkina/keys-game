@@ -1,9 +1,11 @@
 <template>
   <div class="room-one">
     <div class="key-container"></div>
-    <div class="key-container1" v-for="item in items" :key="item.id">
-      <div>
+
+    <div class="key-container1">
+      <div v-for="(item, i) in items" :key="item.id">
         <img
+          @click="moving, items.splice(i, 1)"
           :src="item.image"
           :style="{
             width: item.width,
@@ -11,6 +13,7 @@
             top: item.top,
             left: item.left,
             position: item.position,
+            cursor: item.cursor,
           }"
         />
       </div>
@@ -23,11 +26,6 @@
         >
       </transition>
     </div>
-    <!-- <KeyDiv @click="add()" imageUrl="/img/key1.png" />
-    <KeyDiv imageUrl="/img/key2.png" />
-    <KeyDiv imageUrl="/img/key3.png" />
-    <KeyDiv imageUrl="/img/key4.png" />
-    <KeyDiv imageUrl="/img/key5.png" /> -->
   </div>
 </template>
 
@@ -35,13 +33,9 @@
 import { ref } from 'vue';
 import RulesDiv from './RulesDiv.vue';
 import MyButton from './MyButton.vue';
-import KeyDiv from './KeyDiv.vue';
+
 const show = ref(false);
-let container = ref([]);
-const add = (item) => {
-  container.push(item);
-};
-const items = [
+const items = ref([
   {
     id: 1,
     image: '/img/clef1.png',
@@ -50,6 +44,7 @@ const items = [
     top: '359px',
     left: '47px',
     position: 'absolute',
+    cursor: 'pointer',
   },
   {
     id: 2,
@@ -59,6 +54,7 @@ const items = [
     top: '2px',
     left: '1317px',
     position: 'absolute',
+    cursor: 'pointer',
   },
   {
     id: 3,
@@ -68,6 +64,7 @@ const items = [
     top: '244px',
     left: '985px',
     position: 'absolute',
+    cursor: 'pointer',
   },
   {
     id: 4,
@@ -77,6 +74,7 @@ const items = [
     top: '821px',
     left: '1283px',
     position: 'absolute',
+    cursor: 'pointer',
   },
   {
     id: 5,
@@ -86,8 +84,13 @@ const items = [
     top: '670px',
     left: '1284px',
     position: 'absolute',
+    cursor: 'pointer',
   },
-];
+]);
+
+const moving = (event) => {
+  alert(event.target.id);
+};
 </script>
 
 <style scoped>
@@ -128,6 +131,9 @@ const items = [
   left: 0;
   width: 1400px;
   height: 1400px;
+}
+.clef {
+  cursor: pointer;
 }
 .fade-enter-active,
 .fade-leave-active {
