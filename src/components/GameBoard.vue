@@ -1,11 +1,21 @@
 <template>
   <div class="room-one">
-    <div class="key-container"></div>
+    <div class="key-container">
+      <div v-for="clef in clefs" :key="clef.id" class="clef">
+        <img
+          :src="clef.image"
+          :style="{
+            width: '30px',
+            height: '60px',
+          }"
+        />
+      </div>
+    </div>
 
     <div class="key-container1">
       <div v-for="(item, i) in items" :key="item.id">
         <img
-          @click="moving, items.splice(i, 1)"
+          @click="add(item), items.splice(i, 1)"
           :src="item.image"
           :style="{
             width: item.width,
@@ -88,8 +98,9 @@ const items = ref([
   },
 ]);
 
-const moving = (event) => {
-  alert(event.target.id);
+const clefs = ref([]);
+const add = (item) => {
+  clefs.value.push(item);
 };
 </script>
 
@@ -107,7 +118,7 @@ const moving = (event) => {
 .rules {
   display: flex;
   flex-direction: column;
-  margin: 300px auto 50px;
+  margin: 220px auto 50px;
 }
 .start {
   display: flex;
@@ -115,9 +126,12 @@ const moving = (event) => {
   margin: 0 auto;
 }
 .key-container {
+  display: flex;
+  padding: 8px;
+  gap: 20px;
   position: absolute;
-  top: 140px;
-  left: 440px;
+  top: 120px;
+  left: 430px;
   background-image: url(/public/img/key-container.png);
   background-repeat: no-repeat;
   background-size: cover;

@@ -3,7 +3,8 @@
     <p class="title">Правила игры</p>
     <p class="description">
       чтобы перейти <br />
-      на следующий уровень<br />
+      на следующий<br />
+      уровень<br />
       собери все ключи,<br />
       кликая по ним мышкой<br />
     </p>
@@ -28,7 +29,7 @@
 }
 .description {
   font-size: 1.8rem;
-  color: #472f14;
+  color: #140d06;
   text-align: center;
   text-transform: uppercase;
   font-weight: 700;
