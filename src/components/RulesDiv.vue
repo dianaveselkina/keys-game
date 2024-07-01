@@ -13,6 +13,7 @@
 <script></script>
 <style>
 .rules {
+  z-index: 5;
   width: 450px;
   height: 550px;
   background: linear-gradient(rgba(186, 124, 55, 0.5), rgba(181, 182, 33, 0.5));
@@ -21,6 +22,7 @@
   text-align: center;
 }
 .title {
+  z-index: 5;
   font-size: 3rem;
   color: #472f14;
   text-align: center;
@@ -28,6 +30,7 @@
   font-weight: 700;
 }
 .description {
+  z-index: 5;
   font-size: 1.8rem;
   color: #140d06;
   text-align: center;

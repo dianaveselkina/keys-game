@@ -11,7 +11,6 @@
         />
       </div>
     </div>
-
     <div class="key-container1">
       <div v-for="(item, i) in items" :key="item.id">
         <img
@@ -24,6 +23,7 @@
             left: item.left,
             position: item.position,
             cursor: item.cursor,
+            rotate: item.rotate,
           }"
         />
       </div>
@@ -35,6 +35,7 @@
           >Начать игру</MyButton
         >
       </transition>
+      <div class="door"></div>
     </div>
   </div>
 </template>
@@ -51,8 +52,8 @@ const items = ref([
     image: '/img/clef1.png',
     width: '30px',
     height: '60px',
-    top: '359px',
-    left: '47px',
+    top: '364px',
+    left: '53px',
     position: 'absolute',
     cursor: 'pointer',
   },
@@ -71,8 +72,9 @@ const items = ref([
     image: '/img/clef3.png',
     width: '30px',
     height: '60px',
-    top: '244px',
-    left: '985px',
+    top: '247px',
+    left: '979px',
+    rotate: '146deg',
     position: 'absolute',
     cursor: 'pointer',
   },
@@ -91,10 +93,32 @@ const items = ref([
     image: '/img/clef5.png',
     width: '30px',
     height: '60px',
-    top: '670px',
-    left: '1284px',
+    top: '703px',
+    left: '1283px',
     position: 'absolute',
     cursor: 'pointer',
+    rotate: '-43deg',
+  },
+  {
+    id: 6,
+    image: '/img/clef6.png',
+    width: '30px',
+    height: '60px',
+    top: '423px',
+    left: '1210px',
+    position: 'absolute',
+    cursor: 'pointer',
+  },
+  {
+    id: 6,
+    image: '/img/clef6.png',
+    width: '30px',
+    height: '60px',
+    top: '553px',
+    left: '101px',
+    position: 'absolute',
+    cursor: 'pointer',
+    rotate: '215deg',
   },
 ]);
 
@@ -116,6 +140,8 @@ const add = (item) => {
   height: 1400px;
 }
 .rules {
+  position: relative;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   margin: 220px auto 50px;
@@ -128,14 +154,14 @@ const add = (item) => {
 .key-container {
   display: flex;
   padding: 8px;
-  gap: 20px;
+  gap: 28px;
   position: absolute;
   top: 120px;
   left: 430px;
   background-image: url(/public/img/key-container.png);
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 24px;
+  border-radius: 9px;
   width: 380px;
   height: 68px;
 }
@@ -146,7 +172,18 @@ const add = (item) => {
   width: 1400px;
   height: 1400px;
 }
-.clef {
+.door {
+  position: absolute;
+  top: 272px;
+  left: 530px;
+  width: 212px;
+  height: 365px;
+  background-image: url(/public/img/door.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.door:hover {
+  transform: perspective(500px) rotateY(-90deg);
   cursor: pointer;
 }
 .fade-enter-active,
