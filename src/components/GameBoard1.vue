@@ -21,24 +21,21 @@
     <div id="17" @click="select($event)" class="key-box key7"></div>
 
     <div class="diamond-container">
-      <!-- <div v-show="targetId - 10 === magicKey"> -->
-      <div v-for="adamant in adamants" :key="adamant.id">
-        <img
-          :src="adamant.image"
-          :style="{
-            width: '60px',
-            height: '60px',
-          }"
-        />
-      </div>
+      <img
+        v-for="diamond in diamonds"
+        :key="diamond.id"
+        :src="adamant"
+        :style="{
+          width: '60px',
+          height: '60px',
+        }"
+      />
     </div>
-    <!-- </div> -->
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-const show = ref(false);
 const clefs = ref([
   {
     id: 1,
@@ -83,52 +80,28 @@ const clefs = ref([
     height: '60px',
   },
 ]);
-const adamants = ref([
-  {
-    id: 1,
-    image: '/img/diamond1.png',
-  },
-  {
-    id: 2,
-    image: '/img/diamond1.png',
-  },
-  {
-    id: 3,
-    image: '/img/diamond1.png',
-  },
-  {
-    id: 4,
-    image: '/img/diamond1.png',
-  },
-  {
-    id: 5,
-    image: '/img/diamond1.png',
-  },
-  {
-    id: 6,
-    image: '/img/diamond1.png',
-  },
-  {
-    id: 7,
-    image: '/img/diamond1.png',
-  },
-]);
+
 let magicKey = '';
 const add = (clef) => {
   magicKey = clef.id;
-  console.log(magicKey);
 };
-
 const select = (event) => {
   let targetId = event.target.id;
-
-  // targetId - 10 === magicKey ? addDiamond() : console.log('!!!!');
+  targetId - 10 === magicKey
+    ? success(magicKey)
+    : alert('вы не угадали. попробуйте еще раз 😉');
 };
-
+const adamant = '/img/diamond1.png';
 const diamonds = ref([]);
-const addDiamond = (adamant) => {
+const success = (magicKey) => {
+  addDiamond();
+  filterClef(magicKey);
+};
+const addDiamond = () => {
   diamonds.value.push(adamant);
-  console.log('Diamond');
+};
+const filterClef = (magicKey) => {
+  clefs.value = clefs.value.filter((clef) => clef.id !== magicKey);
 };
 </script>
 
@@ -143,14 +116,22 @@ const addDiamond = (adamant) => {
   width: 1400px;
   height: 1400px;
 }
-
+.test {
+  position: absolute;
+  bottom: 500px;
+  left: 224px;
+  background-color: #fff;
+  width: 380px;
+  height: 68px;
+  cursor: pointer;
+}
 .key-container {
   display: flex;
   padding: 8px;
   gap: 28px;
   position: absolute;
-  bottom: 20px;
-  left: 224px;
+  top: 140px;
+  left: 76px;
   background-image: url(/public/img/key-container.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -197,15 +178,13 @@ const addDiamond = (adamant) => {
   left: 913px;
 }
 .diamond-container {
-  position: absolute;
+  border: solid 4px #eef13c;
   display: flex;
+  border-radius: 12px;
   padding: 8px;
   gap: 28px;
   width: 588px;
   height: 58px;
-  bottom: 20px;
-  left: 700px;
-  background-color: #fff;
-  opacity: 90%;
+  margin: 1290px auto;
 }
 </style>
