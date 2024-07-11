@@ -35,7 +35,6 @@
           >Начать игру</MyButton
         >
       </transition>
-      <div class="door"></div>
     </div>
   </div>
 </template>
@@ -44,6 +43,7 @@
 import { ref } from 'vue';
 import RulesDiv from './RulesDiv.vue';
 import MyButton from './MyButton.vue';
+import { useRouter } from 'vue-router';
 
 const show = ref(false);
 const items = ref([
@@ -121,10 +121,17 @@ const items = ref([
     rotate: '215deg',
   },
 ]);
+const router = useRouter();
 
 const clefs = ref([]);
+
 const add = (item) => {
   clefs.value.push(item);
+  if (clefs.value.length === 7) {
+    setTimeout(() => {
+      router.push({ path: '/game' });
+    }, '1000');
+  }
 };
 </script>
 
@@ -171,20 +178,6 @@ const add = (item) => {
   left: 0;
   width: 1400px;
   height: 1400px;
-}
-.door {
-  position: absolute;
-  top: 272px;
-  left: 530px;
-  width: 212px;
-  height: 365px;
-  background-image: url(/public/img/door.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.door:hover {
-  transform: perspective(500px) rotateY(-90deg);
-  cursor: pointer;
 }
 .fade-enter-active,
 .fade-leave-active {

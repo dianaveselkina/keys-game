@@ -1,17 +1,11 @@
 <template>
   <div class="app">
-    <!-- <GameBoard /> -->
-    <GameBoard1 />
+    <router-view></router-view>
   </div>
 </template>
 <script>
-// import GameBoard from './components/GameBoard.vue';
-import GameBoard1 from './components/GameBoard1.vue';
 export default {
-  components: {
-    // GameBoard,
-    GameBoard1,
-  },
+  components: {},
 
   data() {
     return {};
