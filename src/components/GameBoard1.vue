@@ -12,6 +12,14 @@
         />
       </div>
     </div>
+    <transition name="fade">
+      <RulesDiv v-if="!show" class="rules" />
+    </transition>
+    <transition name="disappear">
+      <MyButton v-if="!show" @click="show = !show" class="start"
+        >Начать игру</MyButton
+      >
+    </transition>
     <div id="11" @click="select($event)" class="key-box key1"></div>
     <div id="12" @click="select($event)" class="key-box key2"></div>
     <div id="13" @click="select($event)" class="key-box key3"></div>
@@ -36,6 +44,9 @@
 
 <script setup>
 import { ref } from 'vue';
+import RulesDiv from './RulesDiv.vue';
+import MyButton from './MyButton.vue';
+const show = ref(false);
 const clefs = ref([
   {
     id: 1,
@@ -116,14 +127,17 @@ const filterClef = (magicKey) => {
   width: 1400px;
   height: 1400px;
 }
-.test {
-  position: absolute;
-  bottom: 500px;
-  left: 224px;
-  background-color: #fff;
-  width: 380px;
-  height: 68px;
-  cursor: pointer;
+.rules {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  margin: 220px auto 50px;
+}
+.start {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 }
 .key-container {
   display: flex;
@@ -205,5 +219,25 @@ const filterClef = (magicKey) => {
   width: 588px;
   height: 58px;
   margin: 1290px auto;
+}
+.fade-enter-active,
+.fade-leave-active {
+  opacity: 1;
+  transition: all 2s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  transform: translateY(-350px);
+  opacity: 0;
+}
+.disappear-enter-active,
+.disappear-leave-active {
+  opacity: 1;
+  transition: all 2s;
+}
+.disappear-enter-from,
+.disappear-leave-to {
+  transform: translateY(350px);
+  opacity: 0;
 }
 </style>
