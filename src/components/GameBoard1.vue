@@ -75,7 +75,7 @@ const clefs = ref([
   },
   {
     id: 7,
-    image: '/img/clef6.png',
+    image: '/img/clef7.png',
     width: '30px',
     height: '60px',
   },
@@ -142,40 +142,59 @@ const filterClef = (magicKey) => {
 }
 .key-box {
   position: absolute;
-  width: 50px;
-  height: 50px;
-  background-color: #fff;
-  opacity: 10%;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   cursor: pointer;
 }
 .key1 {
-  top: 829px;
-  left: 350px;
+  background-image: url(/public/img//key-icon1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  top: 838px;
+  left: 360px;
 }
 .key2 {
-  top: 1029px;
-  left: 1096px;
+  background-image: url(/public/img//key-icon1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  top: 784px;
+  left: 690px;
 }
 .key3 {
-  top: 849px;
-  left: 1012px;
+  background-image: url(/public/img//key-icon1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  top: 1004px;
+  left: 1158px;
 }
 .key4 {
-  top: 1021px;
-  left: 136px;
+  background-image: url(/public/img//key-icon1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  top: 1032px;
+  left: 150px;
 }
 .key5 {
-  top: 1288px;
-  left: 139px;
+  background-image: url(/public/img//key-icon1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  top: 508px;
+  left: 90px;
 }
 .key6 {
-  top: 1166px;
-  left: 339px;
+  background-image: url(/public/img//key-icon1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  top: 1008px;
+  left: 1322px;
 }
 .key7 {
-  top: 159px;
-  left: 913px;
+  background-image: url(/public/img//key-icon1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  top: 910px;
+  left: 892px;
 }
 .diamond-container {
   border: solid 4px #eef13c;
