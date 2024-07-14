@@ -9,7 +9,7 @@ export default {
   methods: {},
 };
 </script>
-<style>
+<style scoped>
 .game-start {
   margin-top: 4rem;
   padding: 1rem;

@@ -11,7 +11,7 @@
   </div>
 </template>
 <script></script>
-<style>
+<style scoped>
 .rules {
   z-index: 5;
   width: 450px;

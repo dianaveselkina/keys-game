@@ -27,6 +27,13 @@
           }"
         />
       </div>
+      <button @click="addMessage">333333333333333333333</button>
+      <div :class="message ? 'in' : 'out'" class="fade">
+        <p class="level">
+          Вы переходите<br />
+          на сдедующий уровень!
+        </p>
+      </div>
       <transition name="fade">
         <RulesDiv v-if="!show" class="rules" />
       </transition>
@@ -44,6 +51,11 @@ import { ref } from 'vue';
 import RulesDiv from './RulesDiv.vue';
 import MyButton from './MyButton.vue';
 import { useRouter } from 'vue-router';
+const message = ref(false);
+
+const addMessage = () => {
+  message.value = !message.value;
+};
 
 const show = ref(false);
 const items = ref([
@@ -129,8 +141,11 @@ const add = (item) => {
   clefs.value.push(item);
   if (clefs.value.length === 7) {
     setTimeout(() => {
+      addMessage();
+    }, '1500');
+    setTimeout(() => {
       router.push({ path: '/game' });
-    }, '1000');
+    }, '3000');
   }
 };
 </script>
@@ -151,7 +166,37 @@ const add = (item) => {
   z-index: 10;
   display: flex;
   flex-direction: column;
-  margin: 220px auto 50px;
+  margin: 24px auto 50px;
+}
+.fade {
+  width: 900px;
+  height: 322px;
+  z-index: 15;
+  background: linear-gradient(rgba(186, 124, 55, 0.5), rgba(181, 182, 33, 0.5));
+  border-radius: 3%;
+  border: 4px solid #413e15;
+  text-align: center;
+  position: relative;
+  opacity: 0%;
+  display: block;
+  flex-direction: column;
+  font-size: 72px;
+  color: #e6e4e1;
+  margin: 10px auto 50px;
+}
+.level {
+  text-align: center;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+.in {
+  animation: fadeIn 0.5s ease forwards;
 }
 .start {
   display: flex;

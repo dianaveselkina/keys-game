@@ -12,8 +12,14 @@
         />
       </div>
     </div>
+    <div :class="message ? 'in' : 'out'" class="fade">
+      <p class="level">
+        Вы переходите<br />
+        на сдедующий уровень!
+      </p>
+    </div>
     <transition name="fade">
-      <RulesDiv v-if="!show" class="rules" />
+      <RulesDiv1 v-if="!show" class="rules" />
     </transition>
     <transition name="disappear">
       <MyButton v-if="!show" @click="show = !show" class="start"
@@ -44,8 +50,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import RulesDiv from './RulesDiv.vue';
+import RulesDiv1 from './RulesDiv1.vue';
 import MyButton from './MyButton.vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const show = ref(false);
 const clefs = ref([
   {
@@ -108,8 +116,21 @@ const success = (magicKey) => {
   addDiamond();
   filterClef(magicKey);
 };
+const message = ref(false);
+
+const addMessage = () => {
+  message.value = !message.value;
+};
 const addDiamond = () => {
   diamonds.value.push(adamant);
+  if (diamonds.value.length === 7) {
+    setTimeout(() => {
+      addMessage();
+    }, '1500');
+    setTimeout(() => {
+      router.push({ path: '/game1' });
+    }, '3000');
+  }
 };
 const filterClef = (magicKey) => {
   clefs.value = clefs.value.filter((clef) => clef.id !== magicKey);
@@ -132,20 +153,51 @@ const filterClef = (magicKey) => {
   z-index: 10;
   display: flex;
   flex-direction: column;
-  margin: 220px auto 50px;
+  margin: 35px auto 50px;
 }
 .start {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
 }
+.fade {
+  width: 574px;
+  height: 380px;
+  z-index: 15;
+  background: linear-gradient(rgba(186, 124, 55, 0.5), rgba(181, 182, 33, 0.5));
+  border-radius: 3%;
+  border: 4px solid #413e15;
+  text-align: center;
+  position: relative;
+  opacity: 0%;
+  display: block;
+  flex-direction: column;
+  font-size: 72px;
+  color: #e6e4e1;
+  margin: 10px auto 50px;
+}
+.level {
+  text-align: center;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+.in {
+  animation: fadeIn 0.5s ease forwards;
+}
 .key-container {
+  z-index: 20;
   display: flex;
   padding: 8px;
   gap: 28px;
   position: absolute;
-  top: 140px;
-  left: 76px;
+  top: 16px;
+  left: 10px;
   background-image: url(/public/img/key-container.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -218,7 +270,7 @@ const filterClef = (magicKey) => {
   gap: 28px;
   width: 588px;
   height: 58px;
-  margin: 1290px auto;
+  margin: 900px auto;
 }
 .fade-enter-active,
 .fade-leave-active {
