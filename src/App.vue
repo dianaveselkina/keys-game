@@ -1,8 +1,6 @@
 <template>
   <div class="app">
-    <transition name="excel">
-      <router-view></router-view>
-    </transition>
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -54,14 +52,5 @@ button {
   max-width: 1200px;
   margin: 90px auto;
   background-color: #ffffff;
-}
-.excel-enter-active,
-.excel-leave-active {
-  opacity: 1;
-  transition: 0.5s ease forwards;
-}
-.excel-enter-from,
-.excel-leave-to {
-  opacity: 70%;
 }
 </style>
