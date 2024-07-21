@@ -10,7 +10,7 @@
     </transition>
     <div v-for="crystal in crystals" :key="crystal.id">
       <img
-        @click="emersion(($event, crystal.id))"
+        @click="emersion(), addImage(crystal.conundrumImg)"
         :src="crystal.image"
         :style="{
           width: '25px',
@@ -22,40 +22,22 @@
         }"
       />
     </div>
-    <form class="conundrum" v-show="showConundrum">
-      @submit.prevent="submitForm"
-      <img
-        v-for="picture in pictures"
-        :key="picture.id"
-        :src="picture.image"
-        :style="{
-          width: '600px',
-          height: '600px',
-        }"
-      />
-      <label>Ответ</label>
-      <input v-model="answer" type="text" placeholder="Ваш ответ" />
-      <p>{{ answer }}</p>
-      <button type="submit">Ok</button>
-    </form>
-    <!-- <div id="21" @click="emersion" class="crystal crystal1">
-      <form
-        @submit.prevent="submitForm"
-        class="conundrum"
-        v-show="showConundrum"
-      >
-        <div class="conundrum__img"></div>
-        <label>Ответ</label>
-        <input v-model="answer" type="text" placeholder="Ваш ответ" />
+
+    <div class="form">
+      <form class="conundrum" v-show="showConundrum">
+        <img class="conundrum" :src="imageSrc" />
+        <label>Ваш ответ</label>
+        <input
+          v-bind:value="answer"
+          type="text"
+          placeholder="Ваш ответ"
+          @input="answer = $event.target.value"
+        />
+        <!-- <p>{{ answer }}</p> -->
+        <button class="btn__form">Ok</button>
       </form>
     </div>
-    <div id="22" @click="emersion" class="crystal crystal2"></div>
-    <div id="23" @click="emersion" class="crystal crystal3"></div>
-    <div id="24" @click="emersion" class="crystal crystal4"></div>
-    <div id="25" @click="emersion" class="crystal crystal5"></div>
-    <div id="24" @click="emersion" class="crystal crystal4"></div>
-    <div id="26" @click="emersion" class="crystal crystal6"></div>
-    <div id="27" @click="emersion" class="crystal crystal7"></div> -->
+
     <div class="diamond-container">
       <img
         v-for="diamond in diamonds"
@@ -75,11 +57,15 @@ import RulesDiv2 from './RulesDiv2.vue';
 import MyButton from './MyButton.vue';
 const show = ref(false);
 const showConundrum = ref(false);
-const emersion = (event) => {
-  console.log(event);
+const emersion = () => {
   showConundrum.value = !showConundrum.value;
 };
+
 const answer = ref('');
+let imageSrc = ref('');
+const addImage = (conundrumImg) => {
+  imageSrc = conundrumImg;
+};
 
 const diamonds = ref([
   {
@@ -119,6 +105,8 @@ const crystals = ref([
     left: '389px',
     position: 'absolute',
     cursor: 'pointer',
+    conundrumImg: '/img/conundrum1.png',
+    guess: 'ёж',
   },
   {
     id: 22,
@@ -127,6 +115,7 @@ const crystals = ref([
     left: '526px',
     position: 'absolute',
     cursor: 'pointer',
+    conundrumImg: '/img/conundrum2.png',
   },
   {
     id: 23,
@@ -135,6 +124,7 @@ const crystals = ref([
     left: '1160px',
     position: 'absolute',
     cursor: 'pointer',
+    conundrumImg: '/img/conundrum3.png',
   },
   {
     id: 24,
@@ -143,6 +133,7 @@ const crystals = ref([
     left: '106px',
     position: 'absolute',
     cursor: 'pointer',
+    conundrumImg: '/img/conundrum4.png',
   },
   {
     id: 25,
@@ -151,6 +142,7 @@ const crystals = ref([
     left: '76px',
     position: 'absolute',
     cursor: 'pointer',
+    conundrumImg: '/img/conundrum5.png',
   },
   {
     id: 26,
@@ -159,6 +151,7 @@ const crystals = ref([
     left: '1216px',
     position: 'absolute',
     cursor: 'pointer',
+    conundrumImg: '/img/conundrum6.png',
   },
   {
     id: 27,
@@ -167,17 +160,7 @@ const crystals = ref([
     left: '732px',
     position: 'absolute',
     cursor: 'pointer',
-  },
-]);
-
-const pictures = ref([
-  {
-    id: 31,
-    image: '/img/conundrum1.png',
-  },
-  {
-    id: 32,
-    image: '/img/conundrum2.png',
+    conundrumImg: '/img/conundrum7.png',
   },
 ]);
 </script>
@@ -199,6 +182,22 @@ const pictures = ref([
   flex-direction: column;
   margin: 35px auto 50px;
 }
+.form {
+  z-index: 15;
+}
+label {
+  font-size: 38px;
+  color: #fff;
+}
+input {
+  padding: 10px;
+  border-radius: 10px;
+}
+.btn__form {
+  padding: 10px;
+  border-radius: 10px;
+  width: 100px;
+}
 .conundrum {
   width: 600px;
   height: 700px;
@@ -208,75 +207,19 @@ const pictures = ref([
   flex-direction: column;
   margin: 35px auto 50px;
 }
-.conundrum__img {
-  /* background-image: url(/public/img/conundrum1.png); */
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 550px;
-  height: 400px;
-}
 .start {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
 }
 .crystal {
-  /* position: absolute;
-  width: 25px;
-  height: 25px; */
   border-radius: 50%;
-  /* cursor: pointer; */
 }
-/* .crystal1 {
-  background-image: url(/public/img/diamond2.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  top: 366px;
-  left: 389px;
-} */
-/* .crystal2 {
-  background-image: url(/public/img/diamond2.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  top: 620px;
-  left: 526px;
-} */
-/* .crystal3 {
-  background-image: url(/public/img/diamond2.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  top: 530px;
-  left: 1160px;
-} */
-/* .crystal4 {
-  background-image: url(/public/img/diamond2.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  top: 1066px;
-  left: 106px;
-} */
-/* .crystal5 {
-  background-image: url(/public/img/diamond2.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  top: 602px;
-  left: 76px;
-} */
-/* .crystal6 {
-  background-image: url(/public/img/diamond2.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  top: 1042px;
-  left: 1216px;
-} */
-/* .crystal7 {
-  background-image: url(/public/img/diamond2.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  top: 0px;
-  left: 732px;
-} */
 .diamond-container {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%);
   border: solid 4px #eef13c;
   display: flex;
   border-radius: 12px;
@@ -284,7 +227,7 @@ const pictures = ref([
   gap: 28px;
   width: 588px;
   height: 58px;
-  margin: 1294px auto;
+  margin: 1294px auto 0px;
 }
 .fade-enter-active,
 .fade-leave-active {
