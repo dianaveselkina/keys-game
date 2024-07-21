@@ -44,17 +44,20 @@
       </transition>
     </div>
 
-    <div class="clue">
-      <img
-        v-for="clue in clues"
-        :key="clue.id"
-        :src="clue.image"
-        :style="{
-          width: '60px',
-          height: '60px',
-          cursor: clue.cursor,
-        }"
-      />
+    <div class="clue__key">
+      <p class="clue__text">Подсказки</p>
+      <div>
+        <img
+          v-for="clue in clues"
+          :key="clue.id"
+          :src="clue.image"
+          :style="{
+            width: '60px',
+            height: '60px',
+            cursor: clue.cursor,
+          }"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -177,6 +180,13 @@ const add = (item) => {
 </script>
 
 <style scoped>
+.clue__text {
+  font-size: 48px;
+  padding: 22px 16px;
+  margin: 0;
+  font-weight: 700;
+  color: #472f14;
+}
 .room-one {
   background-image: url(/public/img/room1.jpg);
   background-repeat: no-repeat;
@@ -243,17 +253,20 @@ const add = (item) => {
   width: 380px;
   height: 68px;
 }
-.clue {
+
+.clue__key {
+  background: linear-gradient(rgba(186, 124, 55, 0.5), rgba(181, 182, 33, 0.5));
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 8px;
-  gap: 28px;
+  gap: 2px;
   position: absolute;
   bottom: 20px;
-  left: 20px;
-  border-radius: 9px;
-  width: 380px;
-  height: 68px;
+  left: 60px;
+  border-radius: 20px;
+  border: 6px solid #413e15;
+  width: 432px;
+  height: 200px;
 }
 .key-container1 {
   position: absolute;
