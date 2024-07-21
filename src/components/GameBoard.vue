@@ -43,6 +43,19 @@
         >
       </transition>
     </div>
+
+    <div class="clue">
+      <img
+        v-for="clue in clues"
+        :key="clue.id"
+        :src="clue.image"
+        :style="{
+          width: '60px',
+          height: '60px',
+          cursor: clue.cursor,
+        }"
+      />
+    </div>
   </div>
 </template>
 
@@ -58,6 +71,15 @@ const addMessage = () => {
 };
 
 const show = ref(false);
+const clues = ref([
+  { id: 1, image: '/img/key-icon1.png', cursor: 'pointer' },
+  { id: 2, image: '/img/key-icon1.png', cursor: 'pointer' },
+  { id: 3, image: '/img/key-icon1.png', cursor: 'pointer' },
+  { id: 4, image: '/img/key-icon1.png', cursor: 'pointer' },
+  { id: 5, image: '/img/key-icon1.png', cursor: 'pointer' },
+  { id: 6, image: '/img/key-icon1.png', cursor: 'pointer' },
+  { id: 7, image: '/img/key-icon1.png', cursor: 'pointer' },
+]);
 const items = ref([
   {
     id: 1,
@@ -68,6 +90,7 @@ const items = ref([
     left: '53px',
     position: 'absolute',
     cursor: 'pointer',
+    clue: '/img/clue1.png',
   },
   {
     id: 2,
@@ -78,6 +101,7 @@ const items = ref([
     left: '1317px',
     position: 'absolute',
     cursor: 'pointer',
+    clue: '/img/clue2.png',
   },
   {
     id: 3,
@@ -89,6 +113,7 @@ const items = ref([
     rotate: '146deg',
     position: 'absolute',
     cursor: 'pointer',
+    clue: '/img/clue3.png',
   },
   {
     id: 4,
@@ -99,6 +124,7 @@ const items = ref([
     left: '1283px',
     position: 'absolute',
     cursor: 'pointer',
+    clue: '/img/clue4.png',
   },
   {
     id: 5,
@@ -213,6 +239,18 @@ const add = (item) => {
   background-image: url(/public/img/key-container.png);
   background-repeat: no-repeat;
   background-size: cover;
+  border-radius: 9px;
+  width: 380px;
+  height: 68px;
+}
+.clue {
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+  gap: 28px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
   border-radius: 9px;
   width: 380px;
   height: 68px;
