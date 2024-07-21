@@ -10,7 +10,11 @@
     </transition>
     <div v-for="crystal in crystals" :key="crystal.id">
       <img
-        @click="emersion(), addImage(crystal.conundrumImg)"
+        @click="
+          emersion(),
+            addImage(crystal.conundrumImg),
+            addString(crystal.guessStr)
+        "
         :src="crystal.image"
         :style="{
           width: '25px',
@@ -24,7 +28,11 @@
     </div>
 
     <div class="form">
-      <form class="conundrum" v-show="showConundrum">
+      <form
+        @submit.prevent="submitForm"
+        class="conundrum"
+        v-show="showConundrum"
+      >
         <img class="conundrum" :src="imageSrc" />
         <label>Ваш ответ</label>
         <input
@@ -33,8 +41,8 @@
           placeholder="Ваш ответ"
           @input="answer = $event.target.value"
         />
-        <!-- <p>{{ answer }}</p> -->
-        <button class="btn__form">Ok</button>
+
+        <button @click="compare()" class="btn__form">Ok</button>
       </form>
     </div>
 
@@ -63,10 +71,24 @@ const emersion = () => {
 
 const answer = ref('');
 let imageSrc = ref('');
+let textStr = ref('');
+
 const addImage = (conundrumImg) => {
   imageSrc = conundrumImg;
 };
+const addString = (guessStr) => {
+  textStr = guessStr;
+};
 
+const compare = () => {
+  const answer1 = answer;
+  if (textStr === answer1.value) {
+    console.log('!!!!!!!!!!!!!!!!!!');
+    deleteCrystal();
+  }
+  console.log(textStr);
+  console.log(answer1.value);
+};
 const diamonds = ref([
   {
     id: 1,
@@ -97,6 +119,10 @@ const diamonds = ref([
     image: '/img/diamond1.png',
   },
 ]);
+
+const deleteCrystal = () => {
+  diamonds.value = diamonds.value.splice(1);
+};
 const crystals = ref([
   {
     id: 21,
@@ -106,7 +132,7 @@ const crystals = ref([
     position: 'absolute',
     cursor: 'pointer',
     conundrumImg: '/img/conundrum1.png',
-    guess: 'ёж',
+    guessStr: 'ёж',
   },
   {
     id: 22,
@@ -116,6 +142,7 @@ const crystals = ref([
     position: 'absolute',
     cursor: 'pointer',
     conundrumImg: '/img/conundrum2.png',
+    guessStr: 'мост',
   },
   {
     id: 23,
@@ -125,6 +152,7 @@ const crystals = ref([
     position: 'absolute',
     cursor: 'pointer',
     conundrumImg: '/img/conundrum3.png',
+    guessStr: 'зонт',
   },
   {
     id: 24,
@@ -134,6 +162,7 @@ const crystals = ref([
     position: 'absolute',
     cursor: 'pointer',
     conundrumImg: '/img/conundrum4.png',
+    guessStr: 'банан',
   },
   {
     id: 25,
@@ -143,6 +172,7 @@ const crystals = ref([
     position: 'absolute',
     cursor: 'pointer',
     conundrumImg: '/img/conundrum5.png',
+    guessStr: 'лук',
   },
   {
     id: 26,
@@ -152,6 +182,7 @@ const crystals = ref([
     position: 'absolute',
     cursor: 'pointer',
     conundrumImg: '/img/conundrum6.png',
+    guessStr: 'белка',
   },
   {
     id: 27,
@@ -161,6 +192,7 @@ const crystals = ref([
     position: 'absolute',
     cursor: 'pointer',
     conundrumImg: '/img/conundrum7.png',
+    guessStr: 'заяц',
   },
 ]);
 </script>
@@ -190,7 +222,8 @@ label {
   color: #fff;
 }
 input {
-  padding: 10px;
+  padding: 20px;
+  font-size: 24px;
   border-radius: 10px;
 }
 .btn__form {
