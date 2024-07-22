@@ -12,6 +12,19 @@
       </div>
     </div>
     <div class="key-container1">
+      <div class="clue__key">
+        <p class="clue__text">Подсказки</p>
+        <div>
+          <img
+            @click="showClue(i)"
+            :src="'/img/key-icon1.png'"
+            :style="{
+              width: '60px',
+              height: '60px',
+            }"
+          />
+        </div>
+      </div>
       <div v-for="(item, i) in items" :key="item.id">
         <img
           @click="add(item), items.splice(i, 1)"
@@ -43,21 +56,8 @@
         >
       </transition>
     </div>
-
-    <div class="clue__key">
-      <p class="clue__text">Подсказки</p>
-      <div>
-        <img
-          v-for="clue in clues"
-          :key="clue.id"
-          :src="clue.image"
-          :style="{
-            width: '60px',
-            height: '60px',
-            cursor: clue.cursor,
-          }"
-        />
-      </div>
+    <div class="clue__block">
+      <img class="clue__img" :src="clueImage" />
     </div>
   </div>
 </template>
@@ -74,15 +74,7 @@ const addMessage = () => {
 };
 
 const show = ref(false);
-const clues = ref([
-  { id: 1, image: '/img/key-icon1.png', cursor: 'pointer' },
-  { id: 2, image: '/img/key-icon1.png', cursor: 'pointer' },
-  { id: 3, image: '/img/key-icon1.png', cursor: 'pointer' },
-  { id: 4, image: '/img/key-icon1.png', cursor: 'pointer' },
-  { id: 5, image: '/img/key-icon1.png', cursor: 'pointer' },
-  { id: 6, image: '/img/key-icon1.png', cursor: 'pointer' },
-  { id: 7, image: '/img/key-icon1.png', cursor: 'pointer' },
-]);
+
 const items = ref([
   {
     id: 1,
@@ -139,6 +131,7 @@ const items = ref([
     position: 'absolute',
     cursor: 'pointer',
     rotate: '-43deg',
+    clue: '/img/clue4.png',
   },
   {
     id: 6,
@@ -150,6 +143,7 @@ const items = ref([
     position: 'absolute',
     cursor: 'pointer',
     rotate: '215deg',
+    clue: '/img/clue4.png',
   },
   {
     id: 7,
@@ -160,8 +154,14 @@ const items = ref([
     left: '1312px',
     position: 'absolute',
     cursor: 'pointer',
+    clue: '/img/clue4.png',
   },
 ]);
+let clueImage = ref('');
+
+const showClue = () => {
+  clueImage.value = items.value[0].clue;
+};
 const router = useRouter();
 
 const clefs = ref([]);
@@ -267,6 +267,12 @@ const add = (item) => {
   border: 6px solid #413e15;
   width: 432px;
   height: 200px;
+}
+.clue__img {
+  width: 300px;
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .key-container1 {
   position: absolute;
