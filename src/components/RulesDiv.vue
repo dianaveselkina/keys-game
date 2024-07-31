@@ -7,15 +7,22 @@
       уровень<br />
       собери все ключи,<br />
       кликая по ним мышкой<br />
+      <br />
+      можно использовать<br />
+      две подсказки
     </p>
   </div>
 </template>
 <script></script>
 <style scoped>
+p {
+  padding: 0;
+  margin: 0;
+}
 .rules {
   z-index: 5;
   width: 450px;
-  height: 550px;
+  height: 594px;
   background: linear-gradient(rgba(186, 124, 55, 0.5), rgba(181, 182, 33, 0.5));
   border-radius: 10%;
   border: 4px solid #413e15;
@@ -23,6 +30,7 @@
 }
 .title {
   z-index: 5;
+  padding: 30px 0 20px;
   font-size: 3rem;
   color: #472f14;
   text-align: center;

@@ -1,5 +1,18 @@
 <template>
   <div class="room-three">
+    <transition name="showPrize">
+      <div class="prize" v-if="prizeVisibility">
+        <div class="prize-image"></div>
+        <p class="prize-text">
+          Супер!!!<br />
+          Ты прошел<br />
+          все уровни<br />
+          и выиграл <br />
+          главный приз
+        </p>
+      </div>
+    </transition>
+    <!-- <button @click="showPrize(), deleteDiamond()">333333333333333333333</button> -->
     <transition name="fade">
       <RulesDiv2 v-if="!show" class="rules" />
     </transition>
@@ -10,11 +23,7 @@
     </transition>
     <div v-for="crystal in crystals" :key="crystal.id">
       <img
-        @click="
-          emersion(),
-            addImage(crystal.conundrumImg),
-            addString(crystal.guessStr)
-        "
+        @click="emersion(), addImage(crystal)"
         :src="crystal.image"
         :style="{
           width: '25px',
@@ -34,11 +43,11 @@
         v-show="showConundrum"
       >
         <img class="conundrum" :src="imageSrc" />
-        <label>Ваш ответ</label>
+        <label>Ваш ответ:</label>
         <input
           v-bind:value="answer"
           type="text"
-          placeholder="Ваш ответ"
+          placeholder="Ваш ответ..."
           @input="answer = $event.target.value"
         />
 
@@ -46,7 +55,7 @@
       </form>
     </div>
 
-    <div class="diamond-container">
+    <div class="diamond-container" v-if="diamondVisibility">
       <img
         v-for="diamond in diamonds"
         :key="diamond.id"
@@ -68,26 +77,28 @@ const showConundrum = ref(false);
 const emersion = () => {
   showConundrum.value = !showConundrum.value;
 };
-
+const prizeVisibility = ref(false);
+const diamondVisibility = ref(true);
 const answer = ref('');
-let imageSrc = ref('');
-let textStr = ref('');
+let imageSrc = '';
+let textStr = '';
 
-const addImage = (conundrumImg) => {
-  imageSrc = conundrumImg;
-};
-const addString = (guessStr) => {
-  textStr = guessStr;
+let crystalID = ref('');
+
+const addImage = (crystal) => {
+  imageSrc = crystal.conundrumImg;
+  textStr = crystal.guessStr;
+  crystalID.value = crystal.id;
 };
 
 const compare = () => {
   const answer1 = answer;
   if (textStr === answer1.value) {
-    console.log('!!!!!!!!!!!!!!!!!!');
     deleteCrystal();
+    deletePinkCrystal();
+    showConundrum.value = false;
+    answer1.value = '';
   }
-  console.log(textStr);
-  console.log(answer1.value);
 };
 const diamonds = ref([
   {
@@ -122,7 +133,25 @@ const diamonds = ref([
 
 const deleteCrystal = () => {
   diamonds.value = diamonds.value.splice(1);
+  if (diamonds.value.length === 0) {
+    setTimeout(() => {
+      showPrize();
+      deleteDiamond();
+    }, '1500');
+  }
 };
+const deletePinkCrystal = () => {
+  crystals.value = crystals.value.filter(
+    (crystal) => crystal.id !== crystalID.value
+  );
+};
+const showPrize = () => {
+  prizeVisibility.value = true;
+};
+const deleteDiamond = () => {
+  diamondVisibility.value = false;
+};
+diamondVisibility;
 const crystals = ref([
   {
     id: 21,
@@ -207,29 +236,65 @@ const crystals = ref([
   width: 1400px;
   height: 1400px;
 }
+.prize {
+  display: flex;
+  flex-direction: column;
+  height: 700px;
+}
+.prize-image {
+  background-image: url(/public/img/prize.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 24px;
+  z-index: 20;
+  position: absolute;
+  bottom: 220px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 490px;
+  height: 470px;
+}
+.prize-text {
+  position: absolute;
+  top: 260px;
+  left: 50%;
+  transform: translate(-50%);
+  font-size: 3rem;
+  color: #1f2ac2d5;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 1.4;
+  padding: 20px;
+}
 .rules {
   position: relative;
   z-index: 10;
   display: flex;
   flex-direction: column;
-  margin: 35px auto 50px;
+  margin: 200px auto 50px;
 }
 .form {
   z-index: 15;
 }
 label {
+  padding-bottom: 20px;
   font-size: 38px;
-  color: #fff;
+  color: #1d1212;
 }
 input {
   padding: 20px;
-  font-size: 24px;
+  font-size: 38px;
   border-radius: 10px;
+  color: #1d1212;
 }
 .btn__form {
+  margin-top: 20px;
   padding: 10px;
   border-radius: 10px;
   width: 100px;
+  font-size: 38px;
+  color: #1d1212;
 }
 .conundrum {
   width: 600px;
@@ -280,6 +345,15 @@ input {
 .disappear-enter-from,
 .disappear-leave-to {
   transform: translateY(350px);
+  opacity: 0;
+}
+.showPrize-enter-active,
+.showPrize-leave-active {
+  opacity: 1;
+  transition: all 3s;
+}
+.showPrize-enter-from,
+.showPrize-leave-to {
   opacity: 0;
 }
 </style>

@@ -12,19 +12,6 @@
       </div>
     </div>
     <div class="key-container1">
-      <div class="clue__key">
-        <p class="clue__text">Подсказки</p>
-        <div>
-          <img
-            @click="showClue(i)"
-            :src="'/img/key-icon1.png'"
-            :style="{
-              width: '60px',
-              height: '60px',
-            }"
-          />
-        </div>
-      </div>
       <div v-for="(item, i) in items" :key="item.id">
         <img
           @click="add(item), items.splice(i, 1)"
@@ -40,7 +27,7 @@
           }"
         />
       </div>
-      <button @click="addMessage">333333333333333333333</button>
+      <!-- <button @click="addMessage">333333333333333333333</button> -->
       <div :class="message ? 'in' : 'out'" class="fade">
         <p class="level">
           Вы переходите<br />
@@ -55,9 +42,24 @@
           >Начать игру</MyButton
         >
       </transition>
-    </div>
-    <div class="clue__block">
-      <img class="clue__img" :src="clueImage" />
+
+      <div class="clue__block">
+        <p class="clue__text">Подсказки</p>
+        <div class="clue__key">
+          <img
+            @click="showClueImg(i)"
+            :src="'/img/key-icon1.png'"
+            :style="{
+              width: '60px',
+              height: '60px',
+            }"
+          />
+        </div>
+      </div>
+
+      <div class="clue__image" v-show="showClue">
+        <img @click="deleteImg(), count++" class="clue__img" :src="clueImage" />
+      </div>
     </div>
   </div>
 </template>
@@ -68,11 +70,9 @@ import RulesDiv from './RulesDiv.vue';
 import MyButton from './MyButton.vue';
 import { useRouter } from 'vue-router';
 const message = ref(false);
-
 const addMessage = () => {
   message.value = !message.value;
 };
-
 const show = ref(false);
 
 const items = ref([
@@ -159,13 +159,23 @@ const items = ref([
 ]);
 let clueImage = ref('');
 
-const showClue = () => {
+const showClueImg = () => {
   clueImage.value = items.value[0].clue;
+  if (count.value > 1) {
+    alert('вы использовали все подсказки');
+    clueImage.value = false;
+  }
+};
+const showClue = () => {
+  showClue.value = !showClue.value;
+};
+const deleteImg = () => {
+  clueImage.value = false;
 };
 const router = useRouter();
 
 const clefs = ref([]);
-
+const count = ref(0);
 const add = (item) => {
   clefs.value.push(item);
   if (clefs.value.length === 7) {
@@ -180,6 +190,10 @@ const add = (item) => {
 </script>
 
 <style scoped>
+p {
+  padding: 0;
+  margin: 0;
+}
 .clue__text {
   font-size: 48px;
   padding: 22px 16px;
@@ -205,8 +219,8 @@ const add = (item) => {
   margin: 24px auto 50px;
 }
 .fade {
-  width: 900px;
-  height: 322px;
+  width: 800px;
+  height: 190px;
   z-index: 15;
   background: linear-gradient(rgba(186, 124, 55, 0.5), rgba(181, 182, 33, 0.5));
   border-radius: 3%;
@@ -253,26 +267,48 @@ const add = (item) => {
   width: 380px;
   height: 68px;
 }
-
+.active {
+  display: none;
+}
+.clue__image {
+  position: absolute;
+  bottom: 740px;
+  left: 484px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+.clue__block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 160px;
+  position: absolute;
+  bottom: 100px;
+  right: 60px;
+}
 .clue__key {
   background: linear-gradient(rgba(186, 124, 55, 0.5), rgba(181, 182, 33, 0.5));
   display: flex;
   flex-direction: column;
   padding: 8px;
   gap: 2px;
-  position: absolute;
-  bottom: 20px;
-  left: 60px;
   border-radius: 20px;
   border: 6px solid #413e15;
-  width: 432px;
-  height: 200px;
+  width: 120px;
+  height: 80px;
+  align-items: center;
+  cursor: pointer;
 }
 .clue__img {
   width: 300px;
-  height: 500px;
+  height: 430px;
   background-repeat: no-repeat;
   background-size: cover;
+  opacity: 80%;
+  border-radius: 26px;
+  cursor: pointer;
 }
 .key-container1 {
   position: absolute;
@@ -289,6 +325,15 @@ const add = (item) => {
 .fade-enter-from,
 .fade-leave-to {
   transform: translateY(-350px);
+  opacity: 0;
+}
+.fadeClue-enter-active,
+.fadeClue-leave-active {
+  opacity: 1;
+  transition: all 2s;
+}
+.fadeClue-enter-from,
+.fadeClue-leave-to {
   opacity: 0;
 }
 .disappear-enter-active,

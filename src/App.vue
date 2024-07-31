@@ -49,7 +49,7 @@ button {
   border: 0;
 }
 .app {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 90px auto;
   background-color: #ffffff;
 }
