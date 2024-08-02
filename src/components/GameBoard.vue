@@ -27,6 +27,7 @@
           }"
         />
       </div>
+      <!-- <button @click="notify">Notify !</button> -->
       <!-- <button @click="addMessage">333333333333333333333</button> -->
       <div :class="message ? 'in' : 'out'" class="fade">
         <p class="level">
@@ -57,7 +58,7 @@
         </div>
       </div>
 
-      <div class="clue__image" v-show="showClue">
+      <div class="clue__image" v-if="showClue">
         <img @click="deleteImg(), count++" class="clue__img" :src="clueImage" />
       </div>
     </div>
@@ -69,12 +70,30 @@ import { ref } from 'vue';
 import RulesDiv from './RulesDiv.vue';
 import MyButton from './MyButton.vue';
 import { useRouter } from 'vue-router';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 const message = ref(false);
 const addMessage = () => {
   message.value = !message.value;
 };
 const show = ref(false);
-
+const notify = () => {
+  toast('Вы использовали все свои подсказки!!!', {
+    toastStyle: {
+      fontSize: '48px',
+      width: '600px',
+      height: '600px',
+      margin: '24px auto 50px',
+      background:
+        'linear-gradient(rgba(186, 124, 55, 0.5), rgba(181, 182, 33, 0.5))',
+      borderRadius: '3%',
+      border: '4px solid #413e15',
+      textAlign: 'center',
+    },
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 5000,
+  }); // ToastOptions
+};
 const items = ref([
   {
     id: 1,
@@ -162,12 +181,12 @@ let clueImage = ref('');
 const showClueImg = () => {
   clueImage.value = items.value[0].clue;
   if (count.value > 1) {
-    alert('вы использовали все подсказки');
+    notify();
     clueImage.value = false;
   }
 };
 const showClue = () => {
-  showClue.value = !showClue.value;
+  showClue.value = false;
 };
 const deleteImg = () => {
   clueImage.value = false;
@@ -210,6 +229,11 @@ p {
   position: relative;
   width: 1400px;
   height: 1400px;
+}
+.toast-bar {
+  display: flex;
+  flex-direction: column;
+  color: red;
 }
 .rules {
   position: relative;
