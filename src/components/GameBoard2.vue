@@ -12,17 +12,20 @@
         </p>
       </div>
     </transition>
-    <!-- <button @click="showPrize(), deleteDiamond()">333333333333333333333</button> -->
     <transition name="fade">
       <RulesDiv2 v-if="!show" class="rules" />
     </transition>
     <transition name="disappear">
-      <MyButton v-if="!show" @click="show = !show" class="start"
+      <MyButton
+        v-if="!show"
+        @click="(show = !show), showCrystal()"
+        class="start"
         >Начать игру</MyButton
       >
     </transition>
     <div v-for="crystal in crystals" :key="crystal.id">
       <img
+        v-if="crystalVisibility"
         @click="emersion(), addImage(crystal)"
         :src="crystal.image"
         :style="{
@@ -49,8 +52,8 @@
           type="text"
           placeholder="Ваш ответ..."
           @input="answer = $event.target.value"
+          autofocus
         />
-
         <button @click="compare()" class="btn__form">Ok</button>
       </form>
     </div>
@@ -78,6 +81,7 @@ const emersion = () => {
   showConundrum.value = !showConundrum.value;
 };
 const prizeVisibility = ref(false);
+const crystalVisibility = ref(false);
 const diamondVisibility = ref(true);
 const answer = ref('');
 let imageSrc = '';
@@ -224,6 +228,9 @@ const crystals = ref([
     guessStr: 'заяц',
   },
 ]);
+const showCrystal = () => {
+  crystalVisibility.value = true;
+};
 </script>
 <style scoped>
 .room-three {

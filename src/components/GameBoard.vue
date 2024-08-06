@@ -14,6 +14,7 @@
     <div class="key-container1">
       <div v-for="(item, i) in items" :key="item.id">
         <img
+          v-if="keyVisibility"
           @click="add(item), items.splice(i, 1)"
           :src="item.image"
           :style="{
@@ -27,8 +28,6 @@
           }"
         />
       </div>
-      <!-- <button @click="notify">Notify !</button> -->
-      <!-- <button @click="addMessage">333333333333333333333</button> -->
       <div :class="message ? 'in' : 'out'" class="fade">
         <p class="level">
           Вы переходите<br />
@@ -39,7 +38,7 @@
         <RulesDiv v-if="!show" class="rules" />
       </transition>
       <transition name="disappear">
-        <MyButton v-if="!show" @click="show = !show" class="start"
+        <MyButton v-if="!show" @click="(show = !show), showKey()" class="start"
           >Начать игру</MyButton
         >
       </transition>
@@ -67,32 +66,41 @@
 
 <script setup>
 import { ref } from 'vue';
+
 import RulesDiv from './RulesDiv.vue';
 import MyButton from './MyButton.vue';
 import { useRouter } from 'vue-router';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 const message = ref(false);
+const keyVisibility = ref(false);
 const addMessage = () => {
   message.value = !message.value;
 };
 const show = ref(false);
+
 const notify = () => {
   toast('Вы использовали все свои подсказки!!!', {
+    hideProgressBar: true,
     toastStyle: {
-      fontSize: '48px',
-      width: '600px',
-      height: '600px',
-      margin: '24px auto 50px',
+      left: '50%',
+      top: '5em',
+      transform: 'translateX(-50%)',
+      fontSize: '56px',
+      padding: '16px',
+      width: '500px',
+      height: '500px',
       background:
         'linear-gradient(rgba(186, 124, 55, 0.5), rgba(181, 182, 33, 0.5))',
-      borderRadius: '3%',
+      borderRadius: '5%',
       border: '4px solid #413e15',
       textAlign: 'center',
+      color: '#472f14',
     },
     position: toast.POSITION.TOP_CENTER,
-    autoClose: 5000,
-  }); // ToastOptions
+    transition: toast.TRANSITIONS.ZOOM,
+    autoClose: 2000,
+  });
 };
 const items = ref([
   {
@@ -177,7 +185,9 @@ const items = ref([
   },
 ]);
 let clueImage = ref('');
-
+const showKey = () => {
+  keyVisibility.value = true;
+};
 const showClueImg = () => {
   clueImage.value = items.value[0].clue;
   if (count.value > 1) {
@@ -209,6 +219,12 @@ const add = (item) => {
 </script>
 
 <style scoped>
+:root {
+  --toastify-color-progress-light: linear-gradient(
+    rgba(186, 124, 55, 0.5),
+    rgba(181, 182, 33, 0.5)
+  );
+}
 p {
   padding: 0;
   margin: 0;
@@ -230,10 +246,8 @@ p {
   width: 1400px;
   height: 1400px;
 }
-.toast-bar {
-  display: flex;
-  flex-direction: column;
-  color: red;
+.fancy-progress-bar222 {
+  color: #472f14;
 }
 .rules {
   position: relative;
