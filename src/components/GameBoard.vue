@@ -158,7 +158,7 @@ const items = ref([
     position: 'absolute',
     cursor: 'pointer',
     rotate: '-43deg',
-    clue: '/img/clue4.png',
+    clue: '/img/clue5.png',
   },
   {
     id: 6,
@@ -170,7 +170,7 @@ const items = ref([
     position: 'absolute',
     cursor: 'pointer',
     rotate: '215deg',
-    clue: '/img/clue4.png',
+    clue: '/img/clue6.png',
   },
   {
     id: 7,
@@ -181,7 +181,7 @@ const items = ref([
     left: '1312px',
     position: 'absolute',
     cursor: 'pointer',
-    clue: '/img/clue4.png',
+    clue: '/img/clue7.png',
   },
 ]);
 let clueImage = ref('');

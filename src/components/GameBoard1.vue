@@ -22,17 +22,52 @@
       <RulesDiv1 v-if="!show" class="rules" />
     </transition>
     <transition name="disappear">
-      <MyButton v-if="!show" @click="show = !show" class="start"
+      <MyButton v-if="!show" @click="(show = !show), showBox()" class="start"
         >Начать игру</MyButton
       >
     </transition>
-    <div id="11" @click="select($event)" class="key-box key1"></div>
-    <div id="12" @click="select($event)" class="key-box key2"></div>
-    <div id="13" @click="select($event)" class="key-box key3"></div>
-    <div id="14" @click="select($event)" class="key-box key4"></div>
-    <div id="15" @click="select($event)" class="key-box key5"></div>
-    <div id="16" @click="select($event)" class="key-box key6"></div>
-    <div id="17" @click="select($event)" class="key-box key7"></div>
+    <div
+      v-if="boxVisibility"
+      id="11"
+      @click="select($event)"
+      class="key-box key1"
+    ></div>
+    <div
+      v-if="boxVisibility"
+      id="12"
+      @click="select($event)"
+      class="key-box key2"
+    ></div>
+    <div
+      v-if="boxVisibility"
+      id="13"
+      @click="select($event)"
+      class="key-box key3"
+    ></div>
+    <div
+      v-if="boxVisibility"
+      id="14"
+      @click="select($event)"
+      class="key-box key4"
+    ></div>
+    <div
+      v-if="boxVisibility"
+      id="15"
+      @click="select($event)"
+      class="key-box key5"
+    ></div>
+    <div
+      v-if="boxVisibility"
+      id="16"
+      @click="select($event)"
+      class="key-box key6"
+    ></div>
+    <div
+      v-if="boxVisibility"
+      id="17"
+      @click="select($event)"
+      class="key-box key7"
+    ></div>
 
     <div class="diamond-container">
       <img
@@ -55,6 +90,7 @@ import MyButton from './MyButton.vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const show = ref(false);
+const boxVisibility = ref(false);
 const clefs = ref([
   {
     id: 1,
@@ -117,7 +153,9 @@ const success = (magicKey) => {
   filterClef(magicKey);
 };
 const message = ref(false);
-
+const showBox = () => {
+  boxVisibility.value = true;
+};
 const addMessage = () => {
   message.value = !message.value;
 };
