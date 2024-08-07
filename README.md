@@ -1,5 +1,3 @@
-# keys-game
-
 # Игра "Собери ключи"
 
 Создана на Vue.js
@@ -14,3 +12,4 @@
 * Получи сундук с сокровищами
  
 
+![key-game](https://github.com/dianaveselkina/keys-game/blob/master/key-game.jpg)
