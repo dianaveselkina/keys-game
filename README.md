@@ -1,19 +1,16 @@
 # keys-game
 
-## Project setup
-```
-npm install
-```
+# Игра "Собери ключи"
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Создана на Vue.js
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+ [Поиграем](https://keysgame.netlify.app/).
+ 
+* Найди все ключи
+* соедени их с предметами
+* Отгадай все загадки
+* Получи сундук с сокровищами
+ 
+
