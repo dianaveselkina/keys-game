@@ -35,6 +35,7 @@
           left: crystal.left,
           position: crystal.position,
           cursor: crystal.cursor,
+          userSelect: 'none',
         }"
       />
     </div>
@@ -48,11 +49,11 @@
         <img class="conundrum" :src="imageSrc" />
         <label>Ваш ответ:</label>
         <input
-          v-bind:value="answer"
+          v-model="answer"
           type="text"
           placeholder="Ваш ответ..."
           @input="answer = $event.target.value"
-          autofocus
+          ref="answerInput"
         />
         <button @click="compare()" class="btn__form">Ok</button>
       </form>
@@ -72,7 +73,7 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { ref, onUpdated } from 'vue';
 import RulesDiv2 from './RulesDiv2.vue';
 import MyButton from './MyButton.vue';
 const show = ref(false);
@@ -83,18 +84,19 @@ const emersion = () => {
 const prizeVisibility = ref(false);
 const crystalVisibility = ref(false);
 const diamondVisibility = ref(true);
-const answer = ref('');
 let imageSrc = '';
 let textStr = '';
-
+const answerInput = ref(null);
+onUpdated(() => {
+  answerInput.value.focus();
+});
 let crystalID = ref('');
-
 const addImage = (crystal) => {
   imageSrc = crystal.conundrumImg;
   textStr = crystal.guessStr;
   crystalID.value = crystal.id;
 };
-
+const answer = ref('');
 const compare = () => {
   const answer1 = answer;
   if (textStr === answer1.value) {
@@ -305,7 +307,7 @@ input {
 }
 .conundrum {
   width: 600px;
-  height: 700px;
+  height: 400px;
   position: relative;
   z-index: 10;
   display: flex;

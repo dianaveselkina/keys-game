@@ -25,6 +25,7 @@
             position: item.position,
             cursor: item.cursor,
             rotate: item.rotate,
+            userSelect: 'none',
           }"
         />
       </div>
